@@ -11,17 +11,21 @@ Demo : [MPC_controller](https://youtu.be/VtINpEImMoc)
 
 #Model
 There are 3 main component:
+
 	I) The Model state:
+
 		1. Px : x-position of vehicle
 		2. Py : y-position of vehicle
 		3. Psi: Orientation of the vehicle
 		4. v  : velocity of the vehicle.
 
 	II) Actuators:
+		
 		1. deltaPsi : Sterring angle
 		2. a        : acceleration
 
 	III)Update Equation for the model
+		
 		1. x(t+1)   = x(t) + v(t)*cos(psi)*dt
 		2. y(t+1)   = y(t) + v(t)*sin(psi)*dt
 		3. psi(t+1) = psi(t) + (v(t) / Lf)*deltaPsi*dt
@@ -29,19 +33,30 @@ There are 3 main component:
 		**Lf is the distance between the front axle and center of gravity of the vehicle
 
 #Timesteps 
+
 	Timesteps N : 15
+
 	Duration dt : 0.12
 
 #Cost functions:
+	
 	1. Cross track Error (CTE) (coeff: 2000)
+	
 	2. Orientation Error       (coeff: 1700)
+	
 	3. Reference Velocity      (coeff: 1.0)
+	
 	4. Steering actuator       (coeff: 15000)
+	
 	5. Acceleration actuator   (coeff: 1.0)
+	
 	6. Sequential action diff for steering  (coeff : 2.0)
+	
 	7. Sequential action diff for acceleration.
 
+
 #Latency: 
+
 There was a latency of 0.1 seconds between the controller and the actuations. This affected the performance at sharp turns and oscillations were amplified. The solution for this is to increase the timsteps to look ahead the track and also increase the cost of steering actuators and keep the vehicle at safe speed.
 		
 ## Dependencies
